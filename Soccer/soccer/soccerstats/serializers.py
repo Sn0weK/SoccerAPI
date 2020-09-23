@@ -44,7 +44,7 @@ class MatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Match
         read_only_fields = ['id']
-        fields = ["home_team", "away_team", "match_date", "home_score", "away_score", 'shots', 'passes', 'goals']
+        fields = ["home_team", "home_team_name", "away_team", "away_team_name", "match_date", "home_score", "away_score", 'shots', 'passes', 'goals']
 
 
 class MatchListSerializer(serializers.ModelSerializer):

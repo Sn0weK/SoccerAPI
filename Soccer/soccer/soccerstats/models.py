@@ -65,6 +65,12 @@ class Match(models.Model):
     @property
     def goals(self):
         return self.shot_set.filter(is_goal = True)
+    @property
+    def home_team_name(self):
+        return self.home_team.name
+    @property
+    def away_team_name(self):
+        return self.away_team.name
 
 
 class Pass(models.Model):
