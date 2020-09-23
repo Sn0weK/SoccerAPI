@@ -26,7 +26,7 @@ SECRET_KEY = 'o34fk)s-v#%9lfj@o1od10%9_xr9_ee!^@@7s0d&7$e(-0ut%9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -72,6 +72,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'soccer.wsgi.application'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:3000',
+# ]
+# CORS_ORIGIN_REGEX_WHITELIST = [
+#     'http://localhost:3000',
+# ]
 
 
 # Database
