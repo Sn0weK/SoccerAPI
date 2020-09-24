@@ -165,7 +165,7 @@ class MatchPassesListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 
     def post(self, request, *args, **kwargs):
         is_many = isinstance(request.data, list)
-        serialized_data = PassSerializer(data=request.data)
+        serialized_data = PassSerializer(data=request.data, many=is_many)
         if serialized_data.is_valid():
             serialized_data.save()
             return Response(serialized_data.data,status=201)
