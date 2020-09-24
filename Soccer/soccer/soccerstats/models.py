@@ -38,11 +38,12 @@ class Player(models.Model):
     @property
     def shots_count(self):
         return self.shot_set.all().count()
+    @property
     def shots(self):
         return self.shot_set.all()
     @property
-    def passes_count(self):
-        return self.pass_set.filter(player__id = self.id).count()
+    def passes(self):
+        return self.pass_player.all()
     
 
 class Match(models.Model):

@@ -16,10 +16,11 @@ class PassSerializer(serializers.ModelSerializer):
 
 class PlayerSerializer(serializers.ModelSerializer):
     shots = ShotSerializer(many=True, read_only=True)
+    passes = PassSerializer(many=True, read_only=True)
     class Meta:
         model = Player
         read_only_fields = ['id']
-        fields = ["id","first_name", "last_name", "team", "number", "position", "shots_count", "passes_count", "goals_count", "shots"]
+        fields = ['id','first_name', 'last_name', 'team', 'number', 'position', 'shots_count', 'goals_count', 'shots', 'passes',]
 
 
 
