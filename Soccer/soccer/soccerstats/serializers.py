@@ -5,7 +5,7 @@ class ShotSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shot
         read_only_fields = ['id']
-        fields = ["id","match", "team", "player", "time", "position_x", "position_y", "on_target", "is_goal"]
+        fields = ["id","match", "team", "player", "time", "period", "position_x", "position_y", "on_target", "is_goal"]
 
 class PassSerializer(serializers.ModelSerializer):
     class Meta:

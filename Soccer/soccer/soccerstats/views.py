@@ -19,7 +19,8 @@ class MatchListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
         return query
 
     def post(self,request, *args, **kwargs):
-        serialized_data = MatchListSerializer(data=request.data)
+        is_many = isinstance(request.data, list)
+        serialized_data = MatchListSerializer(data=request.data, many=is_many)
         if serialized_data.is_valid():
             serialized_data.save()
             return Response(serialized_data.data,status=201)
@@ -60,7 +61,8 @@ class TeamListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
         return query
 
     def post(self, request, *args, **kwargs):
-        serialized_data = TeamListSerializer(data=request.data)
+        is_many = isinstance(request.data, list)
+        serialized_data = TeamListSerializer(data=request.data, many=is_many)
         if serialized_data.is_valid():
             serialized_data.save()
             return Response(serialized_data.data,status=201)
@@ -103,7 +105,8 @@ class PlayerListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
         return query
 
     def post(self, request, *args, **kwargs):
-        serialized_data = PlayerSerializer(data=request.data)
+        is_many = isinstance(request.data, list)
+        serialized_data = PlayerSerializer(data=request.data, many=is_many)
         if serialized_data.is_valid():
             serialized_data.save()
             return Response(serialized_data.data,status=201)
@@ -145,7 +148,8 @@ class MatchShotsListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
         return query
 
     def post(self, request, *args, **kwargs):
-        serialized_data = PlayerSerializer(data=request.data)
+        is_many = isinstance(request.data, list)
+        serialized_data = ShotSerializer(data=request.data, many=is_many)
         if serialized_data.is_valid():
             serialized_data.save()
             return Response(serialized_data.data,status=201)
@@ -160,7 +164,8 @@ class MatchPassesListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
         return query
 
     def post(self, request, *args, **kwargs):
-        serialized_data = PlayerSerializer(data=request.data)
+        is_many = isinstance(request.data, list)
+        serialized_data = PassSerializer(data=request.data)
         if serialized_data.is_valid():
             serialized_data.save()
             return Response(serialized_data.data,status=201)
