@@ -29,6 +29,7 @@ SoccerAPI requires Python 3.6.7 to run.
 Install the dependencies and devDependencies and start the server.
 
 ```sh
+$ cd soccer
 $ pip install -r requirements.txt
 $ python soccer/manage.py runserver
 ```
