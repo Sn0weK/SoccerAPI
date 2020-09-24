@@ -5,14 +5,21 @@ from rest_framework import generics, mixins
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from .models import *
+from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
+from rest_framework.authentication import BasicAuthentication
 
+
+class ReadOnly(BasePermission):
+    def has_permission(self, request, view):
+        return request.method in SAFE_METHODS
 
 
 # Create your views here.
 class MatchListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
-
+    authentication_classes = [BasicAuthentication]
     queryset            = Match.objects.all()
     serializer_class    = MatchListSerializer
+    permission_classes = [IsAuthenticated|ReadOnly]
 
     def get_queryset(self):
         query = Match.objects.all()
@@ -32,6 +39,8 @@ class MatchAPIView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.R
     queryset            = Match.objects.all()
     serializer_class    = MatchSerializer
     lookup_field        = 'id'
+    permission_classes = [IsAuthenticated|ReadOnly]
+    authentication_classes = [BasicAuthentication]
 
 
     def put(self, request, *args, **kwargs):
@@ -55,6 +64,8 @@ class MatchAPIView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.R
 class TeamListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     queryset = Team.objects.all()
     serializer_class = TeamListSerializer
+    permission_classes = [IsAuthenticated|ReadOnly]
+    authentication_classes = [BasicAuthentication]
 
     def get_queryset(self):
         query = Team.objects.all()
@@ -73,6 +84,8 @@ class TeamAPIView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.Re
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
     lookup_field = ['id']
+    permission_classes = [IsAuthenticated|ReadOnly]
+    authentication_classes = [BasicAuthentication]
 
     def get(self, *args, **kwargs):
         query = Team.objects.get(id=self.kwargs['id'])
@@ -99,6 +112,8 @@ class TeamAPIView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.Re
 class PlayerListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
+    permission_classes = [IsAuthenticated|ReadOnly]
+    authentication_classes = [BasicAuthentication]
 
     def get_queryset(self):
         query = Player.objects.all()
@@ -117,6 +132,8 @@ class PlayerAPIView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.
     queryset = Team.objects.all()
     serializer_class = PlayerSerializer
     lookup_field = ['id']
+    permission_classes = [IsAuthenticated|ReadOnly]
+    authentication_classes = [BasicAuthentication]
 
     def get(self, *args, **kwargs):
         query = Player.objects.get(id=self.kwargs['id'])
@@ -142,6 +159,8 @@ class PlayerAPIView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.
 
 class MatchShotsListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     serializer_class = ShotSerializer
+    permission_classes = [IsAuthenticated|ReadOnly]
+    authentication_classes = [BasicAuthentication]
 
     def get_queryset(self):
         query = Shot.objects.filter(match__id = self.kwargs['id'])
@@ -158,6 +177,8 @@ class MatchShotsListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 
 class MatchPassesListAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     serializer_class = PassSerializer
+    permission_classes = [IsAuthenticated|ReadOnly]
+    authentication_classes = [BasicAuthentication]
 
     def get_queryset(self):
         query = Pass.objects.filter(match__id = self.kwargs['id'])
